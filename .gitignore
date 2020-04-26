@@ -1,6 +1,7 @@
-Temp/
-Logs/Packages-Update.log
-Library/
 Assembly-CSharp.csproj
 Sekiro2D.sln
+Shared.sln
 .vscode/settings.json
+Library/
+Temp/
+Logs/Packages-Update.log
