@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour {
             Debug.DrawRay(rayOrigin, Vector3.up * directionY * rayLength, Color.cyan);
 
             if (Physics.Raycast(rayOrigin, Vector3.up * directionY, out hit, rayLength, collisionMask)) {
-                /*
+                
                 if (hit.collider.CompareTag("Through")) {
                     if (directionY == 1 || hit.distance == 0f) continue;//go through if coming from below
                     if (playerInput.y == -1 && playerIsHittingJump) {
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour {
 
                     }
                 }
-                */
+                
 
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;

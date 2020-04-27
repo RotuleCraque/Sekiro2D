@@ -24,8 +24,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _HorizontalPow: 2.3
-    - _VerticalPow: 0.35
+    - _HorizontalPow: 3.68
+    - _VerticalPow: 0.59
     m_Colors:
-    - _BottomColour: {r: 0, g: 1, b: 0.70425534, a: 1}
+    - _BottomColour: {r: 0, g: 0.9528302, b: 0.9212848, a: 1}
     - _TopColour: {r: 1, g: 0, b: 0.2, a: 1}
