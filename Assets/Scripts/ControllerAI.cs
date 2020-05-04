@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
-public class PlayerController : MonoBehaviour {
+
+public class ControllerAI : MonoBehaviour {
 
     BoxCollider boxCollider;
     RaycastOrigins raycastOrigins;
@@ -79,9 +79,10 @@ public class PlayerController : MonoBehaviour {
                 
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
-
+                
                 collisions.below = directionY == -1;
                 collisions.above = directionY == 1;
+                //print(collisions.below + "  " + Time.frameCount);
 
                 if (collisions.below && playerInput.y == -1) collisions.crouching = true;//is the player crouching 
 
