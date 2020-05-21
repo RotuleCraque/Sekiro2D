@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour {
     bool playerIsHittingJump;
     bool playerDownwardDashing;
 
+    Vector3 velocityStartOfCollisionCheck;
+
     void Start() {
         boxCollider = GetComponent<BoxCollider>();
         collisions.faceDir = 1;
@@ -36,6 +38,8 @@ public class PlayerController : MonoBehaviour {
         playerInput = input;
         playerIsHittingJump = hitJump;
         playerDownwardDashing = isDownwardDashing;
+
+        velocityStartOfCollisionCheck = moveAmount / Time.deltaTime;//this is used to determine if we're triggering blobiness
 
         if (moveAmount.x != 0f) collisions.faceDir = (int)Mathf.Sign(moveAmount.x);
 
@@ -76,6 +80,18 @@ public class PlayerController : MonoBehaviour {
 
                     }
                 }
+
+
+                //blobiness
+                if(Mathf.Abs(velocityStartOfCollisionCheck.y) >= 5f) {
+                    //print(Mathf.Abs(velocityStartOfCollisionCheck.y));
+                    collisions.blobinessTriggered = true;
+                    collisions.blobinessAmplitude = Mathf.Abs(velocityStartOfCollisionCheck.y) * .0025f;
+                    float rangeProgress = Mathf.Clamp01(Mathf.Abs(velocityStartOfCollisionCheck.y) - 35f / Mathf.Abs(velocityStartOfCollisionCheck.y) - 25f);
+                    collisions.blobinessRange = Mathf.Lerp(1.0f, 5f, rangeProgress);
+                    collisions.blobinessOrigin = transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
+                }
+
                 
                 moveAmount.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
@@ -117,6 +133,16 @@ public class PlayerController : MonoBehaviour {
 
                 collisions.left = directionX == -1;
                 collisions.right = directionX == 1;
+
+
+                //blobiness
+                if(Mathf.Abs(velocityStartOfCollisionCheck.x) >= 10f) {
+                    //print(Mathf.Abs(velocityStartOfCollisionCheck.x));
+                    collisions.blobinessTriggered = true;
+                    collisions.blobinessAmplitude = Mathf.Abs(velocityStartOfCollisionCheck.y) * .02f;
+                    collisions.blobinessRange = 2.5f;
+                    collisions.blobinessOrigin = transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
+                }
 
                 /*
                 if (hit.collider.CompareTag("LevelEnd")) {
@@ -188,6 +214,12 @@ public class PlayerController : MonoBehaviour {
 
         public bool canClimb;
 
+
+        public bool blobinessTriggered;
+        public Vector3 blobinessOrigin;
+        public float blobinessAmplitude;
+        public float blobinessRange;
+
         public void Reset() {
             above = below = false;
             left = right = false;
@@ -198,6 +230,13 @@ public class PlayerController : MonoBehaviour {
             justStartedPassingThrough = false;
             hasCompletedLevel = false;
             canClimb = false;
+
+
+            //blobiness
+            blobinessTriggered = false;
+            blobinessOrigin = Vector3.zero;
+            blobinessAmplitude = 0f;
+            blobinessRange = 0f;
         }
     };
 }

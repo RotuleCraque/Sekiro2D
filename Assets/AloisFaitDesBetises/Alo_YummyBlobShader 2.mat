@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Alo_YummyBlobShader
+  m_Name: Alo_YummyBlobShader 2
   m_Shader: {fileID: 4800000, guid: 0235088e5f16af6498a47367e0069d3f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -29,27 +29,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Amplitude0: 0
-    - _Amplitude1: 0.05377414
     - _FallOffHigh: 1
     - _FallOffLow: 0.145
-    - _FresnelPower: 2.78
-    - _GradientOffsetX: -0.6
-    - _GradientOffsetY: 0.02
+    - _FresnelPower: 1
+    - _GradientOffsetX: -0.47
+    - _GradientOffsetY: -0.03
     - _Progress0: 1
-    - _Range0: 5
-    - _Range1: 5
-    - _Reflectivity: 1
-    - _Roughness: 0.312
+    - _Range0: 4
+    - _Reflectivity: 0
+    - _Roughness: 0.602
     - _SpecularHighlightFallOffHigh: 1
-    - _SpecularHighlightFallOffLow: 0.718
-    - _SpecularIntensity: 3.04
-    - _SpecularPower: 6.54
-    - _Timer0: 24
-    - _Timer1: 14.187614
-    - _Wavelength0: 6
-    - _Wavelength1: 6
+    - _SpecularHighlightFallOffLow: 0.633
+    - _SpecularIntensity: 1.75
+    - _SpecularPower: 5.87
+    - _Timer0: 0.8
+    - _Wavelength0: 8
     m_Colors:
-    - _ImpactPoint1: {r: -0.34, g: 2.28, b: 0, a: 0}
-    - _MainColour: {r: 0.764151, g: 0.0036044943, b: 0.22090338, a: 1}
-    - _Position0: {r: -0.103494644, g: -0.10066891, b: 0, a: 0}
-    - _ShadowColour: {r: 0.10586506, g: 0.16153273, b: 0.3679245, a: 1}
+    - _MainColour: {r: 0.03137255, g: 1, b: 0.7490196, a: 1}
+    - _Position0: {r: 0, g: 0, b: 0, a: 0}
+    - _ShadowColour: {r: 0.2924528, g: 0.095185116, b: 0.20634395, a: 1}

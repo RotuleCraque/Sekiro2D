@@ -46,13 +46,7 @@ public class NavThread : MonoBehaviour {
 
 
     void OnDrawGizmos() {
-        Gizmos.color = Color.black;
-
-        for (int i = 0; i < navPoints.Length; i++) {
-            Gizmos.DrawSphere(new Vector3(navPoints[i].x, navPoints[i].y, 0), .35f);
-
-            
-        }
+        
 
         Gizmos.color = Color.white;
         for (int i = 0; i < allNavPoints.Length; i++) {
@@ -60,6 +54,15 @@ public class NavThread : MonoBehaviour {
             if(i < allNavPoints.Length -1) {
                 Gizmos.DrawLine(allNavPoints[i], allNavPoints[i + 1]);
             }
+        }
+
+
+        Gizmos.color = Color.black;
+
+        for (int i = 0; i < navPoints.Length; i++) {
+            Gizmos.DrawSphere(new Vector3(navPoints[i].x, navPoints[i].y, 0), .35f);
+
+            
         }
 
     }

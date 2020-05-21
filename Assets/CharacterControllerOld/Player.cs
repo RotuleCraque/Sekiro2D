@@ -165,6 +165,11 @@ public class Player : MonoBehaviour {
 
     bool receivedDeadlyHit;
 
+    Material characterMat;
+
+
+    BlobinessController blobinessController;
+
 #if UNITY_EDITOR
     [HideInInspector]//public so we can set it when we spawn player from editorManager
     public Vector3 lastRegisteredSpawnerPos;
@@ -187,12 +192,16 @@ public class Player : MonoBehaviour {
         playerCollider = GetComponent<BoxCollider>();
         playerRenderer = GetComponent<Renderer>();
 
+        blobinessController = GetComponent<BlobinessController>();
+
         masterManager = FindObjectOfType<MasterManager>();
 
         uglyNose = transform.GetChild(0).gameObject;//abomination
         uglyNoseRenderer = uglyNose.GetComponent<Renderer>();
         uglyArm = transform.GetChild(1).gameObject;//abomination
         uglyArmRenderer = uglyArm.GetComponent<Renderer>();
+
+        characterMat = GetComponent<Renderer>().sharedMaterial;
 
 
         //this is the projectile stopper
@@ -231,6 +240,13 @@ public class Player : MonoBehaviour {
             isPassingThrough = true;
             timeSinceStartedPassingThrough = passingThroughTimeFrame;
         } else wasPassingThroughLastFrame = false;
+
+
+        //if we hit a surface last frame while we were going fast enough, we trigger the blobiness component here
+        if(controller.collisions.blobinessTriggered) {
+            blobinessController.RegisterBlobData(controller.collisions.blobinessOrigin, 
+                    controller.collisions.blobinessRange, 1f, 6f, controller.collisions.blobinessAmplitude, 24f);
+        }
         
 
         HandleRollBuffer();
@@ -389,6 +405,8 @@ public class Player : MonoBehaviour {
         directionalInput.y = verticalInputFilterCurve.Evaluate(Mathf.Abs(input.y)) * Mathf.Sign(input.y);
 
         if (directionalInput.x != 0f) dirX = Mathf.Sign(directionalInput.x);//store the sign of last x input that was not 0
+
+        characterMat.SetFloat("_InputDirectionX", dirX);
     }
 
     public void OnJumpInputDown() {

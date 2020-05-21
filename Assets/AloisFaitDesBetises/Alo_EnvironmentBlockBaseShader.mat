@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Alo_EnvironmentBlockBaseShader
+  m_Shader: {fileID: 4800000, guid: 7c88a621188827f44a51a2d79e7a5fdb, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _CubeMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _FallOffHigh: 0.5
+    - _FallOffLow: 0.5
+    - _GradientOffsetX: -1.07
+    - _GradientOffsetY: -0.57
+    - _GradientOffsetZ: 0
+    - _Reflectivity: 0.422
+    - _Roughness: 0
+    - _SpecularHighlightFallOffHigh: 1
+    - _SpecularHighlightFallOffLow: 0
+    - _SpecularIntensity: 1
+    - _SpecularPower: 2
+    m_Colors:
+    - _FogColour: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
+    - _GroundColour: {r: 0.13486739, g: 0.1509434, b: 0.101815596, a: 1}
+    - _MainColour: {r: 0.8490566, g: 0.084104665, b: 0.28644696, a: 1}
+    - _ShadowColour: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 1}
