@@ -29,23 +29,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Amplitude0: 0
-    - _Amplitude1: 0.1581803
+    - _Amplitude1: 0.20045313
     - _FallOffHigh: 1
     - _FallOffLow: 0.145
     - _FresnelPower: 1
     - _GradientOffsetX: -0.47
     - _GradientOffsetY: 0.02
     - _Progress0: 1
-    - _Range0: 2.78
-    - _Range1: 2.78
+    - _Range0: 2.69
+    - _Range1: 1.5709825
     - _Reflectivity: 0.442
     - _Roughness: 0
     - _SpecularHighlightFallOffHigh: 1
     - _SpecularHighlightFallOffLow: 0.633
     - _SpecularIntensity: 1.75
     - _SpecularPower: 5.87
-    - _Timer0: 3.19
-    - _Timer1: 1.2716501
+    - _Timer0: 6.21
+    - _Timer1: 4.412604
     - _Wavelength0: 7.04
     - _Wavelength1: 7.04
     m_Colors:

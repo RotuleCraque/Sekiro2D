@@ -53,10 +53,8 @@
                 float3 wsNormal : NORMAL;
                 float3 wsPosition : TEXCOORD1;
                 float3 lsPosition : TEXCOORD2;
+                float3 debugTangent : TEXCOORD3;
             };
-
-            float _Wavelength0, _Range0, _Timer0, _Amplitude0, _Progress0;
-            float4 _Position0;
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
@@ -73,17 +71,80 @@
             float _InputDirectionX;
             float _FresnelPower;
 
+            static int _MaxImpacts = 4;
+            float4 _ImpactPositions[4];
+            float _Wavelengths[4];
+            float _Amplitudes[4];
+            float _Timers[4];
+            float _Ranges[4];
+
+
+            void ComputeBlobiness(inout float4 position, inout float3 normal, inout float4 tangent) {
+
+                //setting up base vectors
+                float3 p = position.xyz;
+                float3 n = normal;
+                float4 t = tangent;
+                float3 b = cross(n, t.xyz) * t.w * unity_WorldTransformParams.w;//worldtransformparams is -1 if the scale is negative
+
+                //accumulation variables
+                float sigmaFunctions = 0;
+                float sigmaDerivatives = 0;
+                float sigmaDirectionDotTangent = 0;
+                float sigmaDirectionDotBinormal = 0;
+
+                for (int i = 0; i < _MaxImpacts; i++) {
+                    float waveNumber = 6.28318 / max(0.0001, _Wavelengths[i]);
+                    float3 vertexToImpactPosition = p - _ImpactPositions[i].xyz;
+                    float vertexToImpactPositionMagnitude = length(vertexToImpactPosition);
+                    float distanceMask = 
+                        smoothstep(0, 1, 1 - max(0.0, vertexToImpactPositionMagnitude / max(0.0001, _Ranges[i])));//smoothstep mask going with radius = range
+                    float function = 
+                        waveNumber * (vertexToImpactPositionMagnitude - _Timers[i]);
+
+                    float3 vertexToImpactPositionNormalised = vertexToImpactPosition / vertexToImpactPositionMagnitude;
+                    float amplitude = _Amplitudes[i] * distanceMask;//amplitude decreases with distance from impact
+                    float sinFunction, cosFunction;
+                    sincos(function, sinFunction, cosFunction);
+
+                    //now the accumulation steps
+                    sigmaFunctions += amplitude * sinFunction;
+                    sigmaDerivatives += waveNumber * amplitude * cosFunction;
+                    sigmaDirectionDotTangent += dot(vertexToImpactPositionNormalised, t.xyz);
+                    sigmaDirectionDotBinormal += dot(vertexToImpactPositionNormalised, b);
+                }
+
+                //now we get the average by dividing the sums by the number of impacts
+                //no need to do it for sigmaFunctions and sigmaDerivatives since if there's no impact their amplitude will be 0, and thus won't increase the sum
+                sigmaDirectionDotTangent /= _MaxImpacts;
+                sigmaDirectionDotBinormal /= _MaxImpacts;
+
+                p += n * sigmaFunctions; //we offset the position along the normal
+
+                t.xyz += n * sigmaDerivatives * sigmaDirectionDotTangent;
+                t *= -t.w * unity_WorldTransformParams.w;
+
+                b += n * sigmaDerivatives * sigmaDirectionDotBinormal;
+
+                normal = normalize(cross(b, t)); //we rebuild the normal from modified tangent and binormal
+                position.xyz = p;
+                tangent = t;
+            }
+
             vertexOutput VertexProgram (vertexInput v) {
 
+                ComputeBlobiness(v.vertex, v.normal, v.tangent);
+                
+                /*
                 /////////////////////////////////////////////
-                float k = 2 * 3.1415927 / (_Wavelength0);
-				float distFromHit1 = distance(v.vertex.xyz, _Position0.xyz);
-				float distanceMask1 = smoothstep(0,1, 1 - max(0.0, (distFromHit1) / _Range0));
-				float f = k * (distFromHit1 + _Timer0);
+                float k = 2 * 3.1415927 / (_Wavelengths[0]);
+				float distFromHit1 = distance(v.vertex.xyz, _ImpactPositions[0].xyz);
+				float distanceMask1 = smoothstep(0,1, 1 - max(0.0, (distFromHit1) / _Ranges[0]));
+				float f = k * (distFromHit1 - _Timers[0]);
 
-				float3 d = v.vertex.xyz - _Position0.xyz;
+				float3 d = v.vertex.xyz - _ImpactPositions[0].xyz;
 				d = normalize(d);
-				float a = _Amplitude0 * distanceMask1;
+				float a = _Amplitudes[0] * distanceMask1;
 				float sinF = sin(f);
 
                 float3 p = v.vertex.xyz;
@@ -114,6 +175,7 @@
 				v.vertex.xyz = p;
 				v.normal = normal;
                 /////////////////////////
+                */
 
                 vertexOutput o;
                 o.lsPosition = v.vertex.xyz;
@@ -121,6 +183,7 @@
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.wsNormal = UnityObjectToWorldNormal(v.normal);
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.debugTangent = v.tangent.xyz;
                 return o;
             }
 
@@ -175,6 +238,7 @@
                 //return float4(specular,1);
                 return col;
                 //return float4(i.wsNormal,1);
+                //return float4(i.debugTangent, 1);
             }
             ENDCG
         }

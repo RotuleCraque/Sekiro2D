@@ -29,7 +29,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Amplitude0: 0
-    - _Amplitude1: 0.05377414
+    - _Amplitude1: 0.035703942
     - _FallOffHigh: 1
     - _FallOffLow: 0.145
     - _FresnelPower: 2.78
@@ -37,19 +37,19 @@ Material:
     - _GradientOffsetY: 0.02
     - _Progress0: 1
     - _Range0: 5
-    - _Range1: 5
+    - _Range1: 1
     - _Reflectivity: 1
     - _Roughness: 0.312
     - _SpecularHighlightFallOffHigh: 1
     - _SpecularHighlightFallOffLow: 0.718
     - _SpecularIntensity: 3.04
     - _SpecularPower: 6.54
-    - _Timer0: 24
-    - _Timer1: 14.187614
+    - _Timer0: 27
+    - _Timer1: 9.530635
     - _Wavelength0: 6
     - _Wavelength1: 6
     m_Colors:
     - _ImpactPoint1: {r: -0.34, g: 2.28, b: 0, a: 0}
     - _MainColour: {r: 0.764151, g: 0.0036044943, b: 0.22090338, a: 1}
-    - _Position0: {r: -0.103494644, g: -0.10066891, b: 0, a: 0}
+    - _Position0: {r: 0.50093555, g: -0.054857254, b: 0, a: 0}
     - _ShadowColour: {r: 0.10586506, g: 0.16153273, b: 0.3679245, a: 1}

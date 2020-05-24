@@ -42,8 +42,8 @@ Material:
     - _SpecularHighlightFallOffLow: 0.633
     - _SpecularIntensity: 1.75
     - _SpecularPower: 5.87
-    - _Timer0: 0.8
-    - _Wavelength0: 8
+    - _Timer0: 11
+    - _Wavelength0: 10
     m_Colors:
     - _MainColour: {r: 0.03137255, g: 1, b: 0.7490196, a: 1}
     - _Position0: {r: 0, g: 0, b: 0, a: 0}

@@ -245,7 +245,7 @@ public class Player : MonoBehaviour {
         //if we hit a surface last frame while we were going fast enough, we trigger the blobiness component here
         if(controller.collisions.blobinessTriggered) {
             blobinessController.RegisterBlobData(controller.collisions.blobinessOrigin, 
-                    controller.collisions.blobinessRange, 1f, 6f, controller.collisions.blobinessAmplitude, 24f);
+                    controller.collisions.blobinessRange, 1f, 6f, controller.collisions.blobinessAmplitude, 30f);
         }
         
 

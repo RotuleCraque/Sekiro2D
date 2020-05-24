@@ -5,3 +5,4 @@ Shared.sln
 Library/
 Temp/
 Logs/Packages-Update.log
+obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache

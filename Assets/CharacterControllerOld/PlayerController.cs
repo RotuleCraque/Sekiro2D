@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour {
                     collisions.blobinessTriggered = true;
                     collisions.blobinessAmplitude = Mathf.Abs(velocityStartOfCollisionCheck.y) * .0025f;
                     float rangeProgress = Mathf.Clamp01(Mathf.Abs(velocityStartOfCollisionCheck.y) - 35f / Mathf.Abs(velocityStartOfCollisionCheck.y) - 25f);
-                    collisions.blobinessRange = Mathf.Lerp(1.0f, 5f, rangeProgress);
+                    collisions.blobinessRange = Mathf.Lerp(.5f, 5f, rangeProgress);
                     collisions.blobinessOrigin = transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
                 }
 
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour {
                 if(Mathf.Abs(velocityStartOfCollisionCheck.x) >= 10f) {
                     //print(Mathf.Abs(velocityStartOfCollisionCheck.x));
                     collisions.blobinessTriggered = true;
-                    collisions.blobinessAmplitude = Mathf.Abs(velocityStartOfCollisionCheck.y) * .02f;
+                    collisions.blobinessAmplitude = Mathf.Abs(velocityStartOfCollisionCheck.x) * .01f;
                     collisions.blobinessRange = 2.5f;
                     collisions.blobinessOrigin = transform.worldToLocalMatrix.MultiplyPoint3x4(hit.point);
                 }
